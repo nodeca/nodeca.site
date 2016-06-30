@@ -1,0 +1,11 @@
+bundles:
+  frontend:
+    - site
+
+
+packages:
+  common:
+    entries:
+      - client/common
+
+  site: {}

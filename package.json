@@ -1,0 +1,8 @@
+{
+  "name"            : "nodeca.site",
+  "description"     : "Custom configuration for nodeca",
+  "version"         : "0.0.1",
+  "keywords"        : [ "nodeca" ],
+  "license"         : "MIT",
+  "repository"      : "nodeca/nodeca.site"
+}

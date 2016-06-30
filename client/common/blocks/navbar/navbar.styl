@@ -1,0 +1,19 @@
+// Replace "Nodeca" text in navbar with logo.svg
+//
+
+@import "nodeca.core/client/common/_variables"
+
+.navbar-brand
+  background-image url('$$ N.router.linkTo('core.static', { file: 'logo.svg' }) $$')
+  background-repeat no-repeat
+  background-size contain
+  margin 8px 0px
+
+  // 1000x210 scaled down
+  width 100px
+  height 21px
+
+  // hide text, but still make it available for screen readers and such;
+  // avoid text appearing when user highlights it
+  text-indent 100px
+  overflow hidden
