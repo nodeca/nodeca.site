@@ -4,6 +4,12 @@
 svgo -i ./logo_nodeca_SVG.svg -o ../static/logo.svg -p 1
 ```
 
+### Generating snippet.jpg
+
+```sh
+convert -resize 640x640 ./logo_rcopen_SVG.svg ../static/snippet.jpg
+```
+
 ### Generating favicons
 
 Use https://realfavicongenerator.net/ with the following options:
