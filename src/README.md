@@ -1,7 +1,7 @@
 ### Generating logo.svg
 
 ```sh
-svgo -i ./logo_nodeca_SVG.svg -o ../public/logo.svg -p 1
+svgo -i ./logo_nodeca_SVG.svg -o ../static/logo.svg -p 1
 ```
 
 ### Generating favicons

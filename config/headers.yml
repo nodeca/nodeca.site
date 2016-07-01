@@ -1,6 +1,3 @@
-applications:
-  - nodeca.site
-
 options:
   # auto-generated using https://realfavicongenerator.net/
   inject_headers:
