@@ -4,16 +4,14 @@
 @import "nodeca.core/client/common/_variables"
 
 .navbar-brand
-  background-image url('$$ N.router.linkTo('core.static', { file: 'logo.svg' }) $$')
+  background-image url('$$ asset_url("nodeca.site/client/common/nodeca_logo/logo.svg") $$')
   background-repeat no-repeat
-  background-size contain
-  margin-top 8px
+  background-size 100px auto
+  background-position 0 7px
 
-  // 1000x210 scaled down
-  width 100px
-  height 21px
+  width 136px
+  margin-right 1rem !important
 
   // hide text, but still make it available for screen readers and such;
   // avoid text appearing when user highlights it
-  text-indent 100px
-  overflow hidden
+  text-indent -1000px
