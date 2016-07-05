@@ -9,4 +9,4 @@ type:
   widget_view: "*.jade"
   widget_js: "*.js"
   bin:
-    - "*.svg"
+    - "nodeca_logo/logo.svg"
