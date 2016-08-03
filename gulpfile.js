@@ -72,7 +72,7 @@ gulp.task('generate-favicon', function (done) {
     },
     versioning: {
       paramName: 'v',
-      paramValue: 'A0RR7gMem5'
+      paramValue: 'Q5wkom4MST'
     },
     markupFile: FAVICON_DATA_FILE
   }, function () {
