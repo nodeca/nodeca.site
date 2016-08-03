@@ -1,8 +1,14 @@
 {
-  "name"            : "nodeca.site",
-  "description"     : "Custom configuration for nodeca",
-  "version"         : "0.0.1",
-  "keywords"        : [ "nodeca" ],
-  "license"         : "MIT",
-  "repository"      : "nodeca/nodeca.site"
+  "name": "nodeca.site",
+  "description": "Custom configuration for nodeca",
+  "version": "0.0.1",
+  "keywords": [
+    "nodeca"
+  ],
+  "license": "MIT",
+  "repository": "nodeca/nodeca.site",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-real-favicon": "^0.2.1"
+  }
 }

@@ -1,5 +1,3 @@
-PATH        := ../../node_modules/.bin:${PATH}
-
 NPM_PACKAGE := $(shell node -e 'process.stdout.write(require("./package.json").name)')
 NPM_VERSION := $(shell node -e 'process.stdout.write(require("./package.json").version)')
 
@@ -8,7 +6,6 @@ TMP_PATH    := /tmp/${NPM_PACKAGE}-$(shell date +%s)
 REMOTE_NAME ?= origin
 REMOTE_REPO ?= $(shell git config --get remote.${REMOTE_NAME}.url)
 
-CURR_HEAD   := $(firstword $(shell git show-ref --hash HEAD | sed 's/^\(.\{6\}\).*$$/\1/') master)
 GITHUB_PROJ := nodeca/${NPM_PACKAGE}
 
 
@@ -27,40 +24,21 @@ lint:
 test: lint
 	cd ../.. && NODECA_APP=${NPM_PACKAGE} $(MAKE) test
 
+icons:
+	rm -f ./client/common/nodeca_logo/logo.svg
+	cp ./src/nodeca_logo.svg ./client/common/nodeca_logo/logo.svg
+	sed -i 's/#4a7fb5/#e0e0e0/g' ./client/common/nodeca_logo/logo.svg
 
-test-ci:
-	rm -rf ${TMP_PATH}
-	git clone git://github.com/nodeca/nodeca.git ${TMP_PATH}
-	mkdir -p ${TMP_PATH}/node_modules
-	cp -r . ${TMP_PATH}/node_modules/${NPM_PACKAGE}
-	cd ${TMP_PATH} && $(MAKE) deps-ci
-	cd ${TMP_PATH} && npm install
-	cd ${TMP_PATH} && NODECA_APP_PATH=./node_modules/${NPM_PACKAGE} $(MAKE) lint
-	cp config/vbconvert.yml.example ${TMP_PATH}/config/vbconvert.yml
-	cd ${TMP_PATH} && NODECA_APP=${NPM_PACKAGE} $(MAKE) test
-	rm -rf ${TMP_PATH}
-
-
-publish:
-	@if test 0 -ne `git status --porcelain | wc -l` ; then \
-		echo "Unclean working tree. Commit or stash changes first." >&2 ; \
-		exit 128 ; \
-		fi
-	@if test 0 -ne `git fetch ; git status | grep '^# Your branch' | wc -l` ; then \
-		echo "Local/Remote history differs. Please push/pull changes." >&2 ; \
-		exit 128 ; \
-		fi
-	@if test 0 -ne `git tag -l ${NPM_VERSION} | wc -l` ; then \
-		echo "Tag ${NPM_VERSION} exists. Update package.json" >&2 ; \
-		exit 128 ; \
-		fi
-	git tag ${NPM_VERSION} && git push origin ${NPM_VERSION}
-	npm publish https://github.com/${GITHUB_PROJ}/tarball/${NPM_VERSION}
+	convert -resize 640x640 -border 40x40 -bordercolor White ./src/nodeca_logo.svg ./static/snippet.jpg
+	./node_modules/.bin/gulp generate-favicon
+	> ./static/headers.html
+	./node_modules/.bin/gulp inject-favicon-markups
+	rm -f ./faviconData.json
 
 
 todo:
 	grep 'TODO' -n -r --exclude-dir=assets --exclude-dir=\.git --exclude=Makefile . 2>/dev/null || test true
 
 
-.PHONY: publish lint test todo
-.SILENT: help lint test todo
+.PHONY: icons lint test todo
+.SILENT: help todo
