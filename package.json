@@ -10,5 +10,17 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-real-favicon": "^0.2.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
   }
 }
