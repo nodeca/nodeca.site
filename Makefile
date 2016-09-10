@@ -13,7 +13,6 @@ help:
 	echo "make help       - Print this help"
 	echo "make lint       - Lint sources with JSHint"
 	echo "make test       - Lint sources and run all tests"
-	echo "make publish    - Set new version tag and publish npm package"
 	echo "make todo       - Find and list all TODOs"
 
 
@@ -21,8 +20,19 @@ lint:
 	cd ../.. && NODECA_APP_PATH=./node_modules/${NPM_PACKAGE} $(MAKE) lint
 
 
-test: lint
+test:
 	cd ../.. && NODECA_APP=${NPM_PACKAGE} $(MAKE) test
+
+
+test-ci:
+	git clone git://github.com/nodeca/nodeca.git ${TMP_PATH}
+	mkdir -p ${TMP_PATH}/nodeca_modules
+	cp -r . ${TMP_PATH}/nodeca_modules/${NPM_PACKAGE}
+	cd ${TMP_PATH} && $(MAKE) deps-ci
+	echo 'applications:\n - nodeca.site' > ${TMP_PATH}/config/additional.yml
+	cd ${TMP_PATH} && NODECA_APP=${NPM_PACKAGE} $(MAKE) test
+	rm -rf ${TMP_PATH}
+
 
 icons:
 	rm -f ./client/common/nodeca_logo/logo.svg
