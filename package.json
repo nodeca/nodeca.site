@@ -9,7 +9,10 @@
   "repository": "nodeca/nodeca.site",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-real-favicon": "^0.2.1"
+    "gulp-real-favicon": "^0.2.1",
+    "is-my-json-valid": "^2.15.0",
+    "lodash": "^4.16.4",
+    "send": "^0.14.1"
   },
   "browserify": {
     "transform": [
