@@ -4,7 +4,7 @@
 @import "nodeca.core/client/common/_variables"
 
 .navbar-brand
-  background-image url('$$ JSON.stringify("data:image/svg+xml;base64," + new Buffer(asset_body("nodeca.site/client/common/nodeca_logo/logo.svg")).toString("base64")) $$')
+  background-image url('$$ JSON.stringify("data:image/svg+xml;base64," + Buffer.from(asset_body("nodeca.site/client/common/nodeca_logo/logo.svg")).toString("base64")) $$')
   background-repeat no-repeat
   background-size auto 20px
   background-position 0 7px
