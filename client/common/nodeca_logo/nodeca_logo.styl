@@ -9,10 +9,13 @@
   background-size auto 20px
   background-position 0 7px
 
-  width 136px
-  margin-right 1rem !important
+  min-width 96px
+  margin-right 1.7rem !important
 
   // hide text, but still make it available for screen readers and such;
   // avoid text appearing when user highlights it
   text-indent -1000px
-  overflow hidden   // needed for correct link outline
+
+  // needed for correct link outline
+  overflow hidden
+  vertical-align bottom // Fix for collapsed state
