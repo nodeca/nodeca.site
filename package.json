@@ -12,7 +12,7 @@
     "gulp-real-favicon": "^0.2.1",
     "is-my-json-valid": "^2.15.0",
     "lodash": "^4.16.4",
-    "send": "^0.14.1"
+    "send": "^0.15.0"
   },
   "browserify": {
     "transform": [
