@@ -6,17 +6,5 @@
     "nodeca"
   ],
   "license": "MIT",
-  "repository": "nodeca/nodeca.site",
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "@babel/preset-env"
-          ]
-        }
-      ]
-    ]
-  }
+  "repository": "nodeca/nodeca.site"
 }
