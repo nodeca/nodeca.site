@@ -24,31 +24,27 @@ test:
 	cd ../.. && NODECA_APP=${NPM_PACKAGE} $(MAKE) test
 
 
+deps-ci: ;
+
+
 test-ci:
 	git clone git://github.com/nodeca/nodeca.git ${TMP_PATH}
-	mkdir -p ${TMP_PATH}/nodeca_modules
-	cp -r . ${TMP_PATH}/nodeca_modules/${NPM_PACKAGE}
+
+	test -n "${GITHUB_BRANCH}" && test "${GITHUB_BRANCH}" != "master" && \
+		cd ${TMP_PATH} && \
+		git rev-parse --verify "origin/${GITHUB_BRANCH}" && \
+		git checkout -b "${GITHUB_BRANCH}" "origin/${GITHUB_BRANCH}" || true
+
 	cd ${TMP_PATH} && $(MAKE) deps-ci
-	echo 'applications:\n - nodeca.site' > ${TMP_PATH}/config/additional.yml
-	cd ${TMP_PATH} && NODECA_APP=${NPM_PACKAGE} $(MAKE) test
+	cd ${TMP_PATH} && rm -rf ${TMP_PATH}/nodeca_modules/${NPM_PACKAGE}
+	cp -r . ${TMP_PATH}/nodeca_modules/${NPM_PACKAGE}
+	cd ${TMP_PATH} && NODECA_APP=${NPM_PACKAGE} $(MAKE) test-ci
 	rm -rf ${TMP_PATH}
-
-
-icons:
-	rm -f ./client/common/nodeca_logo/logo.svg
-	cp ./src/nodeca_logo.svg ./client/common/nodeca_logo/logo.svg
-	sed -i 's/#4a7fb5/#ffffff/g' ./client/common/nodeca_logo/logo.svg
-
-	convert -resize 640x640 -border 40x40 -bordercolor White ./src/nodeca_logo.svg ./static/snippet.jpg
-	../../node_modules/.bin/gulp generate-favicon
-	> ./static/headers.html
-	../../node_modules/.bin/gulp inject-favicon-markups
-	rm -f ./faviconData.json
 
 
 todo:
 	grep 'TODO' -n -r --exclude-dir=assets --exclude-dir=\.git --exclude=Makefile . 2>/dev/null || test true
 
 
-.PHONY: icons lint test todo
-.SILENT: help todo
+.PHONY: lint test todo
+.SILENT: help lint test todo
